@@ -15,7 +15,7 @@ namespace Fire
 
         const int Width = 640, Height = 480;
         const int ColorDepth = 256;
-        
+
         const int AvgFlameWidth = 35;
         const int MaxFlameHeight = 330;
         const int FlameChance = 15;
@@ -55,7 +55,7 @@ namespace Fire
         [STAThread]
         static int Main()
         {
-            using ( RenderingDirectDraw engine = new RenderingDirectDraw( ApplicationName ) )
+            using( RenderingDirectDraw engine = new RenderingDirectDraw( ApplicationName ) )
             {
                 engine.SetFrameLimit( 60 );
                 engine.SetRender( Render );
@@ -73,7 +73,7 @@ namespace Fire
 
         #region Render
 
-        static void CreateBuffer(int width, int height)
+        static void CreateBuffer( int width, int height )
         {
             FireBufferHeight = height > MaxFlameHeight ? MaxFlameHeight : height;
             FireBufferWidth = width;
@@ -84,7 +84,7 @@ namespace Fire
         static void Render( IRenderSurface display )
         {
             EnsureCorrectBufferSize( display );
-               
+
             GenerateCoalBed( display );
 
             Flame( display );
@@ -96,7 +96,7 @@ namespace Fire
         {
             int clientSize = display.Stride + display.Height;
 
-            if ( PreviousClientSize != clientSize )
+            if( PreviousClientSize != clientSize )
             {
                 CreateBuffer( display.Stride, display.Height );
 
@@ -108,7 +108,7 @@ namespace Fire
         {
             int coalStart = display.YValues[ FireBufferHeight - CoalHeight - 1 ];
             int coalEnd = display.YValues[ FireBufferHeight - 1 ] + FireBufferWidth;
-            
+
             int position = coalStart;
 
             while( position != coalEnd )
@@ -134,7 +134,7 @@ namespace Fire
                     {
                         if( position > FireBufferWidth || offset >= FireBuffer.Length )
                             break;
-                        
+
                         FireBuffer[ offset + position ] = ( byte ) Randomizer.Next( MinFlameIntensity, MaxFlameIntensity );
 
                         position++;
@@ -155,7 +155,7 @@ namespace Fire
                 l = x == 0 ? 0 : x - 1;
                 r = x == FireBufferWidth - 1 ? FireBufferWidth - 1 : x + 1;
 
-                for ( int y = 0; y < FireBufferHeight - 1; y++ )
+                for( int y = 0; y < FireBufferHeight - 1; y++ )
                 {
                     u = y == 0 ? 0 : y - 1;
                     d = y == FireBufferHeight - 1 ? FireBufferHeight : y + 1;
@@ -170,18 +170,18 @@ namespace Fire
                     p6 = FireBuffer[ display.YValues[ y ] + r ];
                     p7 = FireBuffer[ display.YValues[ d ] + r ];
 
-                    FireBuffer[ display.YValues[ u ] + x ] = ( byte )( ( p1 + p2 + +p3 + p4 + p5 + p6 + p7 ) / 7 );
+                    FireBuffer[ display.YValues[ u ] + x ] = ( byte ) ( ( p1 + p2 + +p3 + p4 + p5 + p6 + p7 ) / 7 );
                 }
             }
         }
 
         static void DrawFire( IRenderSurface display )
         {
-            int height = display.Height >= FireBufferHeight ? 
-                    FireBufferHeight : FireBufferHeight - display.Height, 
+            int height = display.Height >= FireBufferHeight ?
+                    FireBufferHeight : FireBufferHeight - display.Height,
                 start = display.Height - height,
                 position = 0;
-            
+
             byte* dest; int offset; Color pixel;
 
             for( int row = start; row < ( display.Height - CoalHeight ); row++ )
@@ -190,7 +190,7 @@ namespace Fire
 
                 dest = ( byte* ) ( display.Surface ) + ( offset << 2 );
 
-                for ( int x = 0; x < display.Stride; x++ )
+                for( int x = 0; x < display.Stride; x++ )
                 {
                     pixel = Palette[ FireBuffer[ display.YValues[ position ] + x ] ];
 
