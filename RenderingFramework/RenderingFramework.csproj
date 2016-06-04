@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{076C75DB-46C0-42FF-BA50-3348123FA12D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RenderingFramework</RootNamespace>
+    <AssemblyName>RenderingFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DirectDrawWrapper, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\DirectDrawWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ColorUtility.cs" />
+    <Compile Include="Common\VectorPrimitives.cs" />
+    <Compile Include="DirectDraw\RenderingDirectDraw.cs" />
+    <Compile Include="GDI\Native\Enums\TernaryRasterOperations.cs" />
+    <Compile Include="GDI\Native\GDIMethods.cs" />
+    <Compile Include="GDI\RenderingGDI.cs" />
+    <Compile Include="GDI\RenderingGraphics.cs" />
+    <Compile Include="GDI\RenderingMemory.cs" />
+    <Compile Include="Core\MemoryFiller.cs" />
+    <Compile Include="Interfaces\IRenderSurface.cs" />
+    <Compile Include="Core\RenderingCore.cs" />
+    <Compile Include="Forms\RenderingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IRenderCallback.cs" />
+    <Compile Include="Native\Enums\HitTest.cs" />
+    <Compile Include="Native\Enums\MouseButtons.cs" />
+    <Compile Include="Native\Enums\WindowMessage.cs" />
+    <Compile Include="Native\NativeMethods.cs" />
+    <Compile Include="Native\Structures\Message.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderingLight.cs" />
+    <Compile Include="Core\ColorEncoder.cs" />
+    <Compile Include="Core\DisplayController.cs" />
+    <Compile Include="Core\FrameController.cs" />
+    <Compile Include="Core\ResourceUtility.cs" />
+    <Compile Include="Core\SurfaceDescription.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\default.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DirectDraw\Resources\DirectX.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="References\DirectDrawWrapper.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
